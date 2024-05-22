@@ -1,0 +1,29 @@
+.container {
+	width: 750px;
+}
+
+.table {
+	border-collapse: collapse;
+}
+
+.tableItem {
+	width: 170px;
+	padding-bottom: 10px;
+}
+.tableItemText {
+	width: 300px;
+	padding-bottom: 10px;
+}
+
+.search {
+	margin-bottom: 20px;
+}
+
+.searchTitle {
+	padding-right: 10px;
+}
+
+.searchText {
+	width: 300px;
+	padding: 5px 10px;
+}

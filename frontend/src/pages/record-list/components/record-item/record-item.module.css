@@ -1,0 +1,14 @@
+.container {
+	font-size: 12px;
+	border: 1px solid black;
+}
+
+.tableRow {
+	padding: 10px 15px;
+	text-align: center;
+	border: 1px solid black;
+}
+.select {
+	font-size: 15px;
+	padding: 5px 15px;
+}

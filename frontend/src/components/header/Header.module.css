@@ -1,0 +1,28 @@
+.container {
+  padding: 10px 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1085px;
+  gap: 10px;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 10px #696b6780;
+  border-radius: 5px;
+}
+
+.containerLogo {
+}
+
+.containerButton {
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.exitContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}

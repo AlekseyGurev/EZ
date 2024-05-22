@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1085px;
+}
+
+.formContainer {
+  text-align: center;
+}
+
+.inputContainer {
+  width: 300px;
+  margin: 0 auto;
+  border: none;
+}
+
+.titleInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* flex-direction: column; */
+}
+
+.error {
+  color: red;
+  padding-top: 5px;
+}
+
+.input {
+  height: 30px;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid rgb(173, 171, 169);
+}
+
+.card {
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card:active {
+  background-color: #a4a4a480;
+}
+
+.cards {
+  margin-top: 50px;
+  box-shadow: 5px 5px 10px #696b6780;
+}
