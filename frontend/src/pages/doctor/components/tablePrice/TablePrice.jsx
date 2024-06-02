@@ -72,7 +72,7 @@ export const TablePrice = () => {
         </div>
       ) : null}
       <SearchField search={search} setSearch={setSearch} />
-      {isShowServiceFrom || dataServicesList.length <= 0 ? (
+      {dataServicesList.length <= 0 ? (
         <Typography.Title level={4}>
           {search ? 'Ничего не найдено.' : 'В прайсе нет записей.'}
         </Typography.Title>

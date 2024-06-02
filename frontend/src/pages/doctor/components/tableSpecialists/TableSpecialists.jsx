@@ -62,7 +62,7 @@ export const TableSpecialists = () => {
           <Divider />
         </div>
       ) : null}
-      {isShowDoctorFrom || dataSpecialists.length <= 0 ? (
+      {dataSpecialists.length <= 0 ? (
         <Typography.Title level={4}>
           Специалисты еще не добавлены.
         </Typography.Title>

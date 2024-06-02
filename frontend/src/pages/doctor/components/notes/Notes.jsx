@@ -36,7 +36,7 @@ export const Notes = () => {
           <Divider />
         </>
       )}
-      {isShowNoteFrom || doctor?.notes.length <= 0 ? (
+      {doctor?.notes.length <= 0 ? (
         <Typography.Title level={4}>Заметки еще не добавлены.</Typography.Title>
       ) : (
         <ul className={styles.container}>
