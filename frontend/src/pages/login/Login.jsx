@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../actions/setUserData';
 import { Input } from '../../components';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -32,13 +32,15 @@ export const Login = () => {
       setErrorAuth(!auth.error);
       setIsSend(!isSend);
       reset();
+    } else {
+      setErrorAuth(auth.error);
+      setIsSend(false);
     }
-    setErrorAuth(auth.error);
   };
 
   return (
     <div className={styles.container}>
-      <h2>Авторизация</h2>
+      <Typography.Title>Авторизация</Typography.Title>
       <form
         className={styles.containerForm}
         onSubmit={handleSubmit((authData) => sendAuth(authData))}

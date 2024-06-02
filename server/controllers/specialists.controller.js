@@ -12,7 +12,6 @@ async function addSpecialist(doctorId, specialist) {
 }
 
 async function editSpecialist(id, data) {
-  console.log('tut');
   const updateSpecialist = await Specialist.findByIdAndUpdate(id, data, {
     returnDocument: 'after',
   });

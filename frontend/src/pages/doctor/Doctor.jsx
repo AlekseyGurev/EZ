@@ -6,16 +6,16 @@ import {
 } from '../../actions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spin, Flex, Typography, Button, Modal } from 'antd';
+import { Spin, Flex, Typography, Button, Modal, Divider, Tabs } from 'antd';
 import { selectDoctor, selectUser } from '../../selectors';
-import { TableSpecialists } from './components';
+import { TableSpecialists, Notes, Note, TablePrice } from './components';
 import styles from './Doctor.module.css';
-import { checkAdmin } from '../../utilities/checkAdmin';
 import {
   CheckCircleOutlined,
   DeleteOutlined,
   EditOutlined,
 } from '@ant-design/icons';
+import { useCheckAdmin } from '../../useHooks/useCheckAdmin';
 
 export const Doctor = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +27,7 @@ export const Doctor = () => {
   const dispatch = useDispatch();
   const { doctor } = useSelector(selectDoctor);
   const user = useSelector(selectUser);
+  const isAdmin = useCheckAdmin(user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,6 +67,12 @@ export const Doctor = () => {
     setIsModalOpen(false);
   };
 
+  const TABS = [
+    { label: `Врачи`, key: 0, children: <TableSpecialists /> },
+    { label: `Заметки`, key: 1, children: <Notes /> },
+    { label: `Прайс`, key: 2, children: <TablePrice /> },
+  ];
+
   if (isErrorLoad) {
     return <div>Ошибка загрузки</div>;
   }
@@ -104,20 +111,20 @@ export const Doctor = () => {
                 <Typography.Title level={2} className={styles.title}>
                   {doctor.title}
                 </Typography.Title>
-                {checkAdmin(user) && (
+                {isAdmin && (
                   <>
                     <Button onClick={onEditTitle}>
                       <EditOutlined />
                     </Button>
-                    <Button>
-                      <DeleteOutlined onClick={onDeleteDoctor} />
+                    <Button onClick={onDeleteDoctor}>
+                      <DeleteOutlined />
                     </Button>
                   </>
                 )}
               </>
             )}
           </div>
-          <TableSpecialists />
+          <Tabs type="card" items={TABS} className={styles.tabs} />
         </div>
       )}
     </>

@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectDoctors, selectUser } from '../../selectors';
 import { useNavigate } from 'react-router-dom';
 import { addDoctorAsync } from '../../actions/addDoctorAsync';
-import { checkAdmin } from '../../utilities/checkAdmin';
 import { useState } from 'react';
 import { ErrorInput } from '../../components/errorInput/ErrorInput';
 import { Input } from '../../components';
+import { useCheckAdmin } from '../../useHooks/useCheckAdmin';
 
 export const Doctors = () => {
   const [isSend, setIsSend] = useState(false);
@@ -19,6 +19,7 @@ export const Doctors = () => {
   const navigate = useNavigate();
 
   const user = useSelector(selectUser);
+  const isAdmin = useCheckAdmin(user);
 
   const showModal = (data) => {
     setIsModalOpen(true);
@@ -60,7 +61,7 @@ export const Doctors = () => {
     },
   };
 
-  const titleError = errors.title?.message;
+  const titleError = errors?.title?.message;
 
   return (
     <div className={styles.container}>
@@ -90,7 +91,7 @@ export const Doctors = () => {
           ))}
       </Card>
       <Divider />
-      {checkAdmin(user) ? (
+      {isAdmin ? (
         <form
           onSubmit={handleSubmit((formData) => sendData(formData))}
           className={styles.formContainer}

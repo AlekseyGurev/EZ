@@ -1,0 +1,13 @@
+.containerForm {
+  margin: 0 auto;
+  width: 450px;
+  padding: 20px;
+}
+
+.fieldset {
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  box-shadow: 5px 5px 10px #696b6780;
+}

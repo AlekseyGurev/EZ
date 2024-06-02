@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { logOut } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../selectors';
+import { useCheckAdmin } from '../../useHooks/useCheckAdmin';
 
 export const Header = () => {
   const location = useLocation();
@@ -13,6 +14,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const isAdmin = useCheckAdmin(user);
 
   const exit = () => {
     Cookies.remove('token');
@@ -35,6 +37,12 @@ export const Header = () => {
         {location.pathname != '/' ? (
           <Link to="/">
             <Button>Врачи</Button>
+          </Link>
+        ) : null}
+
+        {isAdmin ? (
+          <Link to="/users">
+            <Button>Пользователи</Button>
           </Link>
         ) : null}
 

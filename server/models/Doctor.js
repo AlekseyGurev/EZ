@@ -13,10 +13,10 @@ const doctorSchema = mongoose.Schema(
         ref: 'Specialist',
       },
     ],
-    todos: [
+    notes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Todo',
+        ref: 'Note',
       },
     ],
     services: [

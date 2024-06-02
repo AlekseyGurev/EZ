@@ -7,7 +7,7 @@ import { selectUser } from '../../selectors';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ErrorInput, Input } from '../../components';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import { sendAuthDataAsync } from '../../actions/sendAuthDataAsync';
 
 const regFormSchema = yup.object().shape({
@@ -55,11 +55,13 @@ export const Registration = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
+    setIsSend(true);
     await dispatch(sendAuthDataAsync(data)).then((data) => {
       sessionStorage.setItem('userData', JSON.stringify(data.user));
       navigate('/');
       reset();
     });
+    setIsSend(false);
   };
 
   const formError =
@@ -74,7 +76,7 @@ export const Registration = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Регистрация</h2>
+      <Typography.Title level={2}>Регистрация</Typography.Title>
       <form className={styles.containerForm} onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"

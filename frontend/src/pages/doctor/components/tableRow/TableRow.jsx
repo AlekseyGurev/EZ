@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteSpecialistAsync } from '../../../../actions';
 import Modal from 'antd/es/modal/Modal';
 import { useState } from 'react';
-import { selectDoctor, selectUser } from '../../../../selectors';
-import { checkAdmin } from '../../../../utilities/checkAdmin';
+import { selectUser } from '../../../../selectors';
 import { useParams } from 'react-router-dom';
+import { useCheckAdmin } from '../../../../useHooks/useCheckAdmin';
 
 export const TableRow = ({
   specialist,
@@ -18,6 +18,7 @@ export const TableRow = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isAdmin = useCheckAdmin(user);
   const params = useParams();
 
   const handleOk = () => {
@@ -51,12 +52,10 @@ export const TableRow = ({
         <td className={styles.text}>{specialist.additionally}</td>
         <td className={styles.textRow}>{specialist.price}</td>
         <td className={styles.textRow}>{specialist.tel}</td>
-        <td
-          className={`${styles.textRow} ${checkAdmin(user) ? '' : styles.lastRow}`}
-        >
+        <td className={`${styles.textRow} ${isAdmin ? '' : styles.lastRow}`}>
           {specialist.time}
         </td>
-        {checkAdmin(user) ? (
+        {isAdmin ? (
           <td className={styles.containerButton}>
             <Button
               className={styles.button}

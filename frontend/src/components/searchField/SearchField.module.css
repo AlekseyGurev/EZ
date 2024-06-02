@@ -1,0 +1,16 @@
+.container {
+  border: none;
+  align-self: end;
+  margin-bottom: 30px;
+}
+
+.input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border-color: rgb(169, 169, 169, 0.3);
+}
+
+.label {
+  padding: 5px;
+}

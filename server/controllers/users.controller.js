@@ -36,7 +36,26 @@ async function getUser(login, password) {
   return { user, token };
 }
 
+async function getUsers() {
+  const data = await Users.find();
+  return data;
+}
+
+async function deleteUser(id) {
+  return await Users.deleteOne({ _id: id });
+}
+
+async function editUser(id, role) {
+  const updateUser = await Users.findByIdAndUpdate(id, role, {
+    returnDocument: 'after',
+  });
+  return updateUser;
+}
+
 module.exports = {
   createUser,
   getUser,
+  getUsers,
+  deleteUser,
+  editUser,
 };

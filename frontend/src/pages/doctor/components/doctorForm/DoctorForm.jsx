@@ -80,7 +80,7 @@ export const DoctorForm = ({
         {isErrorSend ? (
           <p>Ошибка добавления, попробуйте позже</p>
         ) : (
-          <p>Врач добавлен</p>
+          <p>{editSpecialist ? 'Врач обновлен' : 'Врач добавлен'}</p>
         )}
       </Modal>
       <form

@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px;
+}
+
+.table {
+  width: 1100px;
+  border-collapse: collapse;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+
+.tableTitle {
+  padding-bottom: 10px;
+}
+.containerForm {
+  width: 100%;
+}

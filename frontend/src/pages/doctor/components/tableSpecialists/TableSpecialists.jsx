@@ -2,18 +2,19 @@ import { useSelector } from 'react-redux';
 import { DoctorForm, TableRow } from '../';
 import styles from './TableSpecialists.module.css';
 import { selectDoctor, selectUser } from '../../../../selectors';
-import { Button, Divider, Pagination } from 'antd';
+import { Button, Divider, Pagination, Typography } from 'antd';
 import { useEffect, useState } from 'react';
-import { checkAdmin } from '../../../../utilities/checkAdmin';
 import {
   PAGE_SIZE_SPECIALISTS,
   START_PAGE,
   TABLE_TITLES_SPECIALISTS,
 } from '../../../../constants/tables';
+import { useCheckAdmin } from '../../../../useHooks/useCheckAdmin';
 
 export const TableSpecialists = () => {
   const { doctor } = useSelector(selectDoctor);
   const user = useSelector(selectUser);
+  const isAdmin = useCheckAdmin(user);
   const [editSpecialist, setEditSpecialist] = useState('');
   const [isShowDoctorFrom, setIsShowDoctorFrom] = useState(false);
   const [dataSpecialists, setDataSpecialists] = useState('');
@@ -35,7 +36,37 @@ export const TableSpecialists = () => {
 
   return (
     <div className={styles.container}>
-      {isShowDoctorFrom || dataSpecialists.length <= 0 ? null : (
+      {isAdmin ? (
+        <div className={styles.containerForm}>
+          <Divider />
+          <Button
+            wrap
+            style={{
+              width: '200px',
+            }}
+            type="primary"
+            onClick={() => {
+              setIsShowDoctorFrom(!isShowDoctorFrom);
+              setEditSpecialist('');
+            }}
+          >
+            {isShowDoctorFrom ? 'Скрыть форму' : 'Добавить врача'}
+          </Button>
+          {isShowDoctorFrom ? (
+            <DoctorForm
+              editSpecialist={editSpecialist}
+              setIsShowDoctorFrom={setIsShowDoctorFrom}
+              isShowDoctorFrom={isShowDoctorFrom}
+            />
+          ) : null}
+          <Divider />
+        </div>
+      ) : null}
+      {isShowDoctorFrom || dataSpecialists.length <= 0 ? (
+        <Typography.Title level={4}>
+          Специалисты еще не добавлены.
+        </Typography.Title>
+      ) : (
         <>
           <table className={styles.table}>
             <thead>
@@ -75,32 +106,6 @@ export const TableSpecialists = () => {
           )}
         </>
       )}
-      {checkAdmin(user) ? (
-        <div className={styles.containerForm}>
-          <Divider />
-          <Button
-            wrap
-            style={{
-              width: '200px',
-            }}
-            type="primary"
-            onClick={() => {
-              setIsShowDoctorFrom(!isShowDoctorFrom);
-              setEditSpecialist('');
-            }}
-          >
-            {isShowDoctorFrom ? 'Скрыть форму' : 'Добавить врача'}
-          </Button>
-          {isShowDoctorFrom ? (
-            <DoctorForm
-              editSpecialist={editSpecialist}
-              setIsShowDoctorFrom={setIsShowDoctorFrom}
-              isShowDoctorFrom={isShowDoctorFrom}
-            />
-          ) : null}
-          <Divider />
-        </div>
-      ) : null}
     </div>
   );
 };

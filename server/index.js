@@ -17,11 +17,9 @@ app.use(express.json());
 app.use('/', express.static('../frontend/dist/'));
 app.use('/api', routes);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve('../frontend/dist/index.html'));
-// });
-
-const { authCheck } = require('./auth-check');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('../frontend/dist/index.html'));
+});
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING).then(() => {
   app.listen(port, () => {

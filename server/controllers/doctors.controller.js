@@ -1,5 +1,7 @@
 const chalk = require('chalk');
 const Doctor = require('../models/Doctor');
+const Note = require('../models/Note');
+const Service = require('../models/Service');
 const Specialist = require('../models/Specialist');
 
 async function createDoctor(title) {
@@ -16,9 +18,12 @@ async function getDoctors() {
 }
 
 async function getDoctor(id) {
-  return await Doctor.findById(id).populate({
-    path: 'specialists',
-  });
+  return await Doctor.findById(id)
+    .populate({
+      path: 'specialists',
+    })
+    .populate({ path: 'notes' })
+    .populate({ path: 'services' });
 }
 
 async function editDoctor(id, doctor) {
@@ -30,6 +35,8 @@ async function editDoctor(id, doctor) {
 
 async function deleteDoctor(id) {
   await Specialist.deleteMany({ author: id });
+  await Note.deleteMany({ author: id });
+  await Service.deleteMany({ author: id });
   return await Doctor.deleteOne({ _id: id });
 }
 

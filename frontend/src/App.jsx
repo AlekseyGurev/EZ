@@ -1,6 +1,6 @@
 import './App.css';
 import { Header } from './components';
-import { Login, Doctors, Doctor, Registration } from './pages';
+import { Login, Doctors, Doctor, Registration, Users } from './pages';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadDoctorsAsync } from './actions';
@@ -54,7 +54,8 @@ function App() {
             <Route path="/doctor/:id" element={<Doctor />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
-            <Route path="*" element={<div>Страница не найдена</div>} />
+            <Route path="/users" element={<Users />} />
+            <Route path="*" element={<Doctors />} />
           </Routes>
         </>
       )}
